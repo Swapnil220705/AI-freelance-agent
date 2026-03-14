@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  
+  /* Brutalist high contrast */
+  --color-base: #030303;
+  --color-panel: #0A0A0A;
+  --color-border: #1A1A1A;
+  --color-border-hover: #333333;
+  
+  /* Neon Accents */
+  --color-accent: #FF3366;      /* Neon Rose */
+  --color-secondary: #00FF9D;   /* Cyber Green */
+  --color-success: #00FF9D;
+  --color-warning: #FFD600;     /* Electric Yellow */
+}
+
+:root {
+  --background: var(--color-base);
+  --foreground: #F5F5F5;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  cursor: none; /* Hide default for custom cursor */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+/* Custom Selection */
+::selection {
+  background-color: var(--color-accent);
+  color: #030303;
+}
+
+/* Noise overlay */
+.noise-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Custom Blend Mode Cursor */
+#custom-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #F5F5F5;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background-color 0.2s;
+  will-change: transform;
+}
+
+/* Clickable hover states for cursor */
+body:has(a:hover) #custom-cursor,
+body:has(button:hover) #custom-cursor {
+  width: 64px;
+  height: 64px;
+  background-color: var(--color-accent);
+}
